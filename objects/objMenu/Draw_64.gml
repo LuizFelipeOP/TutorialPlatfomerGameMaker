@@ -13,7 +13,7 @@ for(var i = 0; i < menu_itens; i++){
 	var col = c_white
   }
   var xx = menu_x - 5;
-  var yy = menu_y - (menu_itemHeigth * (i * 1.5))
+  var yy = menu_y - (menu_item_heigth * (i * 1.5))
   draw_set_color(c_black);
   
   draw_text(xx - offset,yy,txt)
@@ -24,3 +24,6 @@ for(var i = 0; i < menu_itens; i++){
   draw_set_color(col)
   draw_text(xx,yy,txt)
 }   
+
+draw_set_color(c_black)
+draw_rectangle(gui_width, gui_height - 200, gui_width + 900, gui_height, false)

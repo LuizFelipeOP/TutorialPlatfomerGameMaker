@@ -23,7 +23,7 @@ if(menu_control){
 	var mouse_y_gui = device_mouse_y_to_gui(0)
 	var mouse_x_gui = device_mouse_x_to_gui(0)
 	if(mouse_y_gui < menu_y) && (mouse_y_gui > menu_top) && (mouse_x_gui < menu_x + 1) && (mouse_x_gui > menu_x - (string_width(menu[2]) + 1)) {
-		menu_cursor = (menu_y - mouse_y_gui) div(menu_itemHeigth * 1.5)
+		menu_cursor = (menu_y - mouse_y_gui) div(menu_item_heigth * 1.5)
 		if(mouse_check_button_pressed(mb_left)){
 			ScreenShake(4,30)
 			menu_x_target = gui_width + 200;
@@ -45,6 +45,8 @@ if(menu_x > gui_width + 150) && (menu_committed != -1){
 			}else{
 				var file = file_text_open_read(SAVEFILE)
 				var target = file_text_read_real(file)
+				global.kills  = file_text_read_real(file)
+				global.has_gun = file_text_read_real(file)
 				file_text_close(file)
 				SlideTransition(TRANS_MODE.GOTO, target)
 			}

@@ -33,8 +33,11 @@ else{
 
 //calculate movement
 var move = key_right - key_left;
-hsp = move * walksp;
-vsp = vsp + grv;
+hsp = (move * walksp) + gun_kick_x;
+gun_kick_x = 0
+
+vsp = (vsp + grv) //+ gun_kick_y;
+//gun_kick_y = 0
 
 canJump -= 1
 if((canJump > 0) && (key_jump || key_jump2)){
@@ -62,6 +65,10 @@ if(place_meeting(x, y + vsp, objWall)){
 y = y + vsp;
 
 //animation
+
+var aim_side = sign(mouse_x - x)
+if(aim_side != 0) image_xscale = aim_side
+
 if(!place_meeting(x, y + 2, objWall)){ //checar colisão com o chão, encontrar melhor tratativa
 	// off the floor
 	sprite_index = sprPlayerA;
@@ -75,6 +82,13 @@ else {
 	if(sprite_index == sprPlayerA){
 		audio_sound_pitch(snLanding, choose(0.8, 1, 1.2))
 		audio_play_sound(snLanding, 5, false)
+		
+		//dust on landing
+		repeat(6){
+			with(instance_create_layer(x, bbox_bottom, "Bullets", objDust)){
+				vsp = 0
+			} 
+		}
 	}
 	image_speed = 1;
 	if(hsp == 0){
@@ -82,7 +96,7 @@ else {
 	}
 	else{
 		sprite_index = sprPlayerR;
+		if(aim_side != sign(hsp)) sprite_index = sprPlayerRb
 	}
 }
 
-if(hsp !=0) image_xscale = sign(hsp)

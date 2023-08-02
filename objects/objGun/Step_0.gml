@@ -21,9 +21,13 @@ if((mouse_check_button(mb_left)) || gamepad_button_check(0, gp_shoulderrb))
 	audio_sound_pitch(snShot, choose(0.8, 1, 1.2))
 	audio_play_sound(snShot, 5, false)
 	with (instance_create_layer(x, y, "Bullets", objBullet)){
-		speed = 25;
+		spd = 25;
 		direction = other.image_angle + random_range(-3,3);
 		image_angle = direction; 
+	}
+	with(objPlayer){
+		gun_kick_x = lengthdir_x(3, other.image_angle - 100)
+		//gun_kick_y = lengthdir_y(2, other.image_angle - 100)
 	}
 }
 recoil = max(0, recoil -1)

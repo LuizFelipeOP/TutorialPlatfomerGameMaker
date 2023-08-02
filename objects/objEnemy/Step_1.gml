@@ -7,5 +7,11 @@ if(hp <= 0){
 		if (sign(hsp) != 0) image_xscale = sign(hsp) * other.size
 		image_yscale = other.size
 	}
+	with(myGun) instance_destroy()
+	if(instance_exists(objPlayer)){
+		global.kills++
+		global.kills_this_room++
+		with(objGame) kill_text_scale = 2
+	}
 	instance_destroy()
 }
